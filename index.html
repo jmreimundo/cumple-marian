@@ -1,0 +1,389 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Los 40 de Mariana · Edición especial</title>
+  <style>
+    :root {
+      --bg-color: #0b131f;       /* Azul noche */
+      --card-bg: #131d2c;
+      --text-light: #ffffff;    /* Blanco puro */
+      --text-muted: #cbd5e0;
+      /* Tipografía estrictamente Sans-Serif */
+      --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: var(--bg-color);
+      color: var(--text-light);
+      font-family: var(--font-main);
+      display: flex;
+      justify-content: center;
+      padding: 0;
+      margin: 0;
+    }
+
+    .app-container {
+      max-width: 450px;
+      width: 100%;
+      min-height: 100vh;
+      background: var(--bg-color);
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      padding: 20px 15px;
+    }
+
+    .story-card {
+      background: var(--card-bg);
+      border: 1px solid rgba(255, 255, 255, 0.25);
+      border-radius: 16px;
+      padding: 25px 20px;
+      text-align: center;
+      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    }
+
+    .greek-title {
+      font-family: var(--font-main);
+      font-weight: 600;
+      color: #ffffff;
+      letter-spacing: 2px;
+      font-size: 0.85rem;
+      text-transform: uppercase;
+      margin-bottom: 5px;
+    }
+
+    h1, h2 {
+      font-family: var(--font-main);
+      font-weight: 700;
+      color: #ffffff;
+      letter-spacing: 0.5px;
+    }
+
+    h1 { font-size: 1.8rem; margin-bottom: 5px; }
+    h2 { font-size: 1.3rem; margin-bottom: 15px; }
+
+    .subtitle {
+      color: var(--text-muted);
+      font-size: 0.9rem;
+      margin-bottom: 15px;
+      font-family: var(--font-main);
+    }
+
+    .divider {
+      width: 50px;
+      height: 1px;
+      background: #ffffff;
+      margin: 15px auto;
+    }
+
+    /* Cuenta regresiva */
+    .countdown-grid {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 15px 0;
+    }
+
+    .box-time {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      padding: 10px;
+      min-width: 65px;
+    }
+
+    .num-time {
+      font-size: 1.4rem;
+      font-weight: bold;
+      color: #ffffff;
+      font-family: var(--font-main);
+    }
+
+    .lbl-time {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      text-transform: uppercase;
+      font-family: var(--font-main);
+    }
+
+    /* Estilo de Fotos Grandes (1 por espacio) */
+    .single-photo-card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin-top: 10px;
+    }
+
+    .single-photo-item {
+      width: 100%;
+      height: 260px;
+      object-fit: cover;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: #0b131f;
+    }
+
+    .single-photo-caption {
+      font-size: 0.85rem;
+      color: #ffffff;
+      margin-top: 10px;
+      font-family: var(--font-main);
+      font-weight: 600;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    /* Botón Spotify Elegante */
+    .btn-spotify {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 14px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      text-decoration: none;
+      margin-top: 15px;
+      background: #1DB954;
+      color: #ffffff;
+      font-family: var(--font-main);
+      transition: opacity 0.2s;
+    }
+    .btn-spotify:hover { opacity: 0.9; }
+
+    /* Botones RSVP */
+    .btn-action {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: 100%;
+      padding: 15px;
+      border-radius: 10px;
+      font-size: 0.95rem;
+      font-weight: bold;
+      text-decoration: none;
+      margin-top: 12px;
+      cursor: pointer;
+      border: none;
+      font-family: var(--font-main);
+      transition: opacity 0.2s;
+    }
+
+    .btn-wsp {
+      background: #25D366;
+      color: #fff;
+    }
+
+    .btn-form {
+      background: #ffffff;
+      color: #0b131f;
+      font-family: var(--font-main);
+      font-weight: 700;
+    }
+
+    /* Modal Desplegable */
+    .modal-overlay {
+      display: none;
+      position: fixed;
+      top: 0; left: 0; right: 0; bottom: 0;
+      background: rgba(11, 19, 31, 0.9);
+      backdrop-filter: blur(5px);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+      padding: 15px;
+    }
+
+    .modal-content {
+      background: var(--card-bg);
+      border: 1px solid #ffffff;
+      border-radius: 16px;
+      width: 100%;
+      max-width: 420px;
+      height: 80vh;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+    }
+
+    .modal-header {
+      padding: 15px;
+      background: rgba(0, 0, 0, 0.3);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .close-modal {
+      background: transparent;
+      border: none;
+      color: #ffffff;
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    .modal-body {
+      flex: 1;
+      width: 100%;
+      height: 100%;
+    }
+
+    .modal-body iframe {
+      width: 100%;
+      height: 100%;
+      border: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="app-container">
+
+    <!-- STORY 1: Portada y Cuenta Regresiva -->
+    <div class="story-card">
+      <div class="greek-title">Empezamos el año con todo...</div>
+      <h1>LOS 40 DE MARIANA</h1>
+      <p class="subtitle">Enero 2027 · Enoile Caballito</p>
+
+      <div class="divider"></div>
+
+      <p style="font-size: 0.85rem; color: var(--text-muted);">FALTAN PARA LA FIESTA:</p>
+      
+      <div class="countdown-grid">
+        <div class="box-time"><div class="num-time" id="days">00</div><div class="lbl-time">Días</div></div>
+        <div class="box-time"><div class="num-time" id="hours">00</div><div class="lbl-time">Hs</div></div>
+        <div class="box-time"><div class="num-time" id="minutes">00</div><div class="lbl-time">Min</div></div>
+        <div class="box-time"><div class="num-time" id="seconds">00</div><div class="lbl-time">Seg</div></div>
+      </div>
+    </div>
+
+    <!-- STORY FOTO 1: El Espacio -->
+    <div class="story-card">
+      <h2>EL ESPACIO</h2>
+      <div class="single-photo-card">
+        <img src="https://lh3.googleusercontent.com/d/1Rdp-ccSAv7ghCFylNODCn5rREG_vhQs-" class="single-photo-item" alt="El Espacio">
+        <span class="single-photo-caption">Enoïle Caballito</span>
+      </div>
+    </div>
+
+    <!-- STORY FOTO 2: Tapeo y Drinks -->
+    <div class="story-card">
+      <h2>RECEPCIÓN</h2>
+      <div class="single-photo-card">
+        <img src="https://lh3.googleusercontent.com/d/12saDFmLIu88sLNkUi1kEgAVwkVrbvhax" class="single-photo-item" alt="Tapeo & Drinks">
+        <span class="single-photo-caption">Tapeo & Cocktails</span>
+      </div>
+    </div>
+
+    <!-- STORY FOTO 3: Pasos de Autor -->
+    <div class="story-card">
+      <h2>GASTRONOMÍA</h2>
+      <div class="single-photo-card">
+        <img src="https://lh3.googleusercontent.com/d/1lk52UAmQoiNKbQZANOx4Hr5ikfA2vx5B" class="single-photo-item" alt="Pasos de Autor">
+        <span class="single-photo-caption">Menú por Pasos</span>
+      </div>
+    </div>
+
+    <!-- STORY FOTO 4: Mesa Dulce -->
+    <div class="story-card">
+      <h2>BRINDIS Y DULCE</h2>
+      <div class="single-photo-card">
+        <img src="https://lh3.googleusercontent.com/d/1NzpQFP1m1-EsNECLX5qthRU9lvBjijdv" class="single-photo-item" alt="Mesa Dulce">
+        <span class="single-photo-caption">Mesa Dulce & Cierre</span>
+      </div>
+    </div>
+
+    <!-- STORY: Información y Música -->
+    <div class="story-card">
+      <h2>DETALLES Y MÚSICA</h2>
+      <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px;">
+        📍 <b>Enoile Café & Eventos</b><br>
+        Jauretche 225, Caballito<br>
+        ⏰ Empezamos 21 h y festejamos hasta la 01 h.<br>
+        👦👧 <i>Menú para niños/as incluido</i>
+      </p>
+
+      <div class="divider"></div>
+
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">BANDA SONORA COLABORATIVA</p>
+      <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 10px;">¡Sumá tus canciones preferidas a la playlist!</p>
+      
+      <a href="https://open.spotify.com/playlist/4gTh844DmK7fYozqPjYD9L?si=jf1bOgDpSHKNJnf_rC37Rw&utm_source=whatsapp" target="_blank" class="btn-spotify">
+        🟢 Abrir Playlist en Spotify
+      </a>
+    </div>
+
+    <!-- STORY: Tarjeta RSVP Dual (Formulario Modal + WhatsApp) -->
+    <div class="story-card">
+      <h2>CONFIRMAR ASISTENCIA</h2>
+      <p class="subtitle">¡Elegí la opción que te sea más cómoda!</p>
+
+      <button class="btn-action btn-form" onclick="openModal()">
+        📝 Completar Ficha de Asistencia
+      </button>
+
+      <a href="https://wa.me/5491165332168?text=%C2%A1Hola%20Mati!%20Confirmo%20mi%20asistencia%20para%20tu%20Sunset%2040th." target="_blank" class="btn-action btn-wsp">
+        💬 Confirmar directo por WhatsApp
+      </a>
+    </div>
+
+  </div>
+
+  <!-- MODAL DE GOOGLE FORMS -->
+  <div class="modal-overlay" id="formModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span style="color: #ffffff; font-family: var(--font-main); font-size: 0.9rem; font-weight: 600;">CONFIRMACIÓN DE ASISTENCIA</span>
+        <button class="close-modal" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <iframe src="https://forms.gle/bDea72XKBmxAVxV16?embedded=true">Cargando formulario...</iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Cuenta regresiva
+    const targetDate = new Date("January 2, 2027 21:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        document.getElementById("days").innerText = "00";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+      document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+      document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+      document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    function openModal() {
+      document.getElementById('formModal').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('formModal').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
