@@ -3,22 +3,24 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Los 40 de Marian · Edición especial</title>
+  <title>Los 40 de Mariana · Edición Especial</title>
   <style>
     :root {
-      --bg-color: #0b131f;       /* Azul noche */
-      --card-bg: #131d2c;
-      --text-light: #ffffff;    /* Blanco puro */
-      --text-muted: #cbd5e0;
-      --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --bg-color: #f7f5f0;       /* Tono arena / blanco tiza estilo Enoile */
+      --card-bg: #ffffff;
+      --text-main: #2b2b2b;      /* Gris oscuro muy legible */
+      --text-muted: #6b7280;
+      --accent-color: #8c7355;   /* Bronce suave estilo mediterráneo */
+      --font-serif: 'Cinzel', 'Didot', 'Garamond', Georgia, serif;
+      --font-sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
 
     body {
       background-color: var(--bg-color);
-      color: var(--text-light);
-      font-family: var(--font-main);
+      color: var(--text-main);
+      font-family: var(--font-sans);
       display: flex;
       justify-content: center;
       padding: 0;
@@ -38,28 +40,26 @@
 
     .story-card {
       background: var(--card-bg);
-      border: 1px solid rgba(255, 255, 255, 0.25);
+      border: 1px solid rgba(140, 115, 85, 0.2);
       border-radius: 16px;
       padding: 25px 20px;
       text-align: center;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.05);
     }
 
     .greek-title {
-      font-family: var(--font-main);
-      font-weight: 600;
-      color: #ffffff;
-      letter-spacing: 2px;
-      font-size: 0.85rem;
+      font-family: var(--font-serif);
+      color: var(--accent-color);
+      letter-spacing: 3px;
+      font-size: 0.8rem;
       text-transform: uppercase;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
     }
 
     h1, h2 {
-      font-family: var(--font-main);
-      font-weight: 700;
-      color: #ffffff;
-      letter-spacing: 0.5px;
+      font-family: var(--font-serif);
+      color: var(--text-main);
+      letter-spacing: 1px;
     }
 
     h1 { font-size: 1.8rem; margin-bottom: 5px; }
@@ -69,17 +69,17 @@
       color: var(--text-muted);
       font-size: 0.9rem;
       margin-bottom: 15px;
-      font-family: var(--font-main);
+      font-family: var(--font-sans);
     }
 
     .divider {
-      width: 50px;
+      width: 40px;
       height: 1px;
-      background: #ffffff;
+      background: var(--accent-color);
       margin: 15px auto;
     }
 
-    /* Cuenta regresiva */
+    /* Cuenta regresiva estilo griego */
     .countdown-grid {
       display: flex;
       justify-content: center;
@@ -88,8 +88,8 @@
     }
 
     .box-time {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      background: #faf8f5;
+      border: 1px solid rgba(140, 115, 85, 0.2);
       border-radius: 8px;
       padding: 10px;
       min-width: 65px;
@@ -98,45 +98,61 @@
     .num-time {
       font-size: 1.4rem;
       font-weight: bold;
-      color: #ffffff;
-      font-family: var(--font-main);
+      color: var(--accent-color);
+      font-family: var(--font-serif);
     }
 
     .lbl-time {
       font-size: 0.7rem;
       color: var(--text-muted);
       text-transform: uppercase;
-      font-family: var(--font-main);
     }
 
-    /* Estilo de Fotos Grandes Locales (1 por espacio) */
-    .single-photo-card {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      margin-top: 10px;
-    }
-
-    .single-photo-item {
+    /* Carrusel de Fotos de Marian (Slide Automático) */
+    .carousel-container {
+      position: relative;
       width: 100%;
-      height: 260px;
-      object-fit: cover;
+      height: 320px;
       border-radius: 12px;
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      background: #0b131f;
+      overflow: hidden;
+      border: 1px solid rgba(140, 115, 85, 0.2);
+      background: #eee;
     }
 
-    .single-photo-caption {
-      font-size: 0.85rem;
-      color: #ffffff;
+    .carousel-slide {
+      position: absolute;
+      top: 0; left: 0; width: 100%; height: 100%;
+      opacity: 0;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .carousel-slide.active {
+      opacity: 1;
+    }
+
+    .carousel-slide img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    /* Mapa Embebido */
+    .map-container {
+      width: 100%;
+      height: 200px;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(140, 115, 85, 0.2);
       margin-top: 10px;
-      font-family: var(--font-main);
-      font-weight: 600;
-      letter-spacing: 1px;
-      text-transform: uppercase;
     }
 
-    /* Botón Spotify Elegante */
+    .map-container iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Botón Spotify */
     .btn-spotify {
       display: flex;
       align-items: center;
@@ -151,7 +167,6 @@
       margin-top: 15px;
       background: #1DB954;
       color: #ffffff;
-      font-family: var(--font-main);
       transition: opacity 0.2s;
     }
     .btn-spotify:hover { opacity: 0.9; }
@@ -171,7 +186,6 @@
       margin-top: 12px;
       cursor: pointer;
       border: none;
-      font-family: var(--font-main);
       transition: opacity 0.2s;
     }
 
@@ -181,10 +195,10 @@
     }
 
     .btn-form {
-      background: #ffffff;
-      color: #0b131f;
-      font-family: var(--font-main);
-      font-weight: 700;
+      background: var(--accent-color);
+      color: #ffffff;
+      font-family: var(--font-serif);
+      letter-spacing: 1px;
     }
 
     /* Modal Desplegable */
@@ -192,7 +206,7 @@
       display: none;
       position: fixed;
       top: 0; left: 0; right: 0; bottom: 0;
-      background: rgba(11, 19, 31, 0.9);
+      background: rgba(43, 43, 43, 0.8);
       backdrop-filter: blur(5px);
       z-index: 1000;
       align-items: center;
@@ -202,7 +216,7 @@
 
     .modal-content {
       background: var(--card-bg);
-      border: 1px solid #ffffff;
+      border: 1px solid var(--accent-color);
       border-radius: 16px;
       width: 100%;
       max-width: 420px;
@@ -215,17 +229,17 @@
 
     .modal-header {
       padding: 15px;
-      background: rgba(0, 0, 0, 0.3);
+      background: #faf8f5;
       display: flex;
       justify-content: space-between;
       align-items: center;
-      border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+      border-bottom: 1px solid rgba(140, 115, 85, 0.2);
     }
 
     .close-modal {
       background: transparent;
       border: none;
-      color: #ffffff;
+      color: var(--text-main);
       font-size: 1.5rem;
       cursor: pointer;
     }
@@ -249,13 +263,13 @@
 
     <!-- STORY 1: Portada y Cuenta Regresiva -->
     <div class="story-card">
-      <div class="greek-title">Empezamos el año con todo...</div>
-      <h1>LOS 40 DE MARIAN 🥳</h1>
-      <p class="subtitle">2 de enero 2027 · Enoile Caballito</p>
+      <div class="greek-title">Celebración Especial</div>
+      <h1>LOS 40 DE MARIAN</h1>
+      <p class="subtitle">2 de enero 2027 · [Enoile](http://googleusercontent.com/map_location_reference/1) Caballito[cite: 1]</p>
 
       <div class="divider"></div>
 
-      <p style="font-size: 0.85rem; color: var(--text-muted);">FALTAN PARA LA FIESTA:</p>
+      <p style="font-size: 0.85rem; color: var(--text-muted);">FALTAN PARA EL GRAN DÍA:</p>
       
       <div class="countdown-grid">
         <div class="box-time"><div class="num-time" id="days">00</div><div class="lbl-time">Días</div></div>
@@ -265,123 +279,39 @@
       </div>
     </div>
 
-    <!-- STORY FOTO 1: El Espacio (01.jpg) -->
+    <!-- STORY 2: Carrusel Exclusivo de Fotos de Marian -->
     <div class="story-card">
-      <h2>Nos vemos en Enoïle Caballito</h2>
-      <div class="single-photo-card">
-        <img src="01.jpg" class="single-photo-item">
+      <h2>MOMENTOS DE MARIAN</h2>
+      <p class="subtitle">Celebrando la vida y los 40</p>
+      
+      <div class="carousel-container">
+        <div class="carousel-slide active"><img src="01.jpg" alt="Marian 1"></div>
+        <div class="carousel-slide"><img src="02.jpg" alt="Marian 2"></div>
+        <div class="carousel-slide"><img src="03.jpg" alt="Marian 3"></div>
+        <div class="carousel-slide"><img src="04.jpg" alt="Marian 4"></div>
       </div>
     </div>
 
-    <!-- STORY FOTO 2: Tapeo y Drinks (02.jpg) -->
+    <!-- STORY 3: Ubicación con Google Maps y Detalles -->
     <div class="story-card">
-      <h2>RECEPCIÓN</h2>
-      <div class="single-photo-card">
-        <img src="02.jpg" class="single-photo-item" alt="Tapeo & Drinks">
-        <span class="single-photo-caption">Tapeo & Cocktails</span>
-      </div>
-    </div>
-
-    <!-- STORY FOTO 3: Pasos de Autor (03.jpg) -->
-    <div class="story-card">
-      <h2>GASTRONOMÍA</h2>
-      <div class="single-photo-card">
-        <img src="03.jpg" class="single-photo-item" alt="Pasos de Autor">
-        <span class="single-photo-caption">Menú por Pasos</span>
-      </div>
-    </div>
-
-    <!-- STORY FOTO 4: Mesa Dulce (04.jpg) -->
-    <div class="story-card">
-      <h2>BRINDIS Y DULCE</h2>
-      <div class="single-photo-card">
-        <img src="04.jpg" class="single-photo-item" alt="Mesa Dulce">
-        <span class="single-photo-caption">Mesa Dulce & Cierre</span>
-      </div>
-    </div>
-
-    <!-- STORY: Información y Música -->
-    <div class="story-card">
-      <h2>DETALLES Y MÚSICA</h2>
-      <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 15px;">
-        📍 <b>Enoile Café & Eventos</b><br>
-        Jauretche 225, Caballito<br>
+      <h2>EL ENCUENTRO</h2>
+      <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 10px;">
+        📍 <b>[Enoile](http://googleusercontent.com/map_location_reference/2) Café & Eventos</b>[cite: 1]<br>
+        Jauretche 225, Caballito[cite: 1]<br>
         ⏰ Empezamos 21 h<br>
         👦👧 <i>Menú para niños incluido</i>
       </p>
 
-      <div class="divider"></div>
+      <!-- Google Maps Embebido -->
+      <div class="map-container">
+        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.992641267814!2d-58.44315!3d-34.6177!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccb7494d72baf%3A0x4504ee444038a8ba!2sDr.%20Arturo%20Jauretche%20225%2C%20C1405%20Cdad.%20Aut%C3%B3noma%20de%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1700000000000!5m2!1ses!2sar" allowfullscreen="" loading="lazy"></iframe>
+      </div>
+    </div>
 
-      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">BANDA SONORA COLABORATIVA</p>
-      <p style="font-size: 0.8rem; color: var(--text-light); margin-bottom: 10px;">¡Sumá tus canciones preferidas a la playlist!</p>
+    <!-- STORY 4: Música / Playlist -->
+    <div class="story-card">
+      <h2>BANDA SONORA</h2>
+      <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 5px;">Música para el festejo</p>
+      <p style="font-size: 0.85rem; margin-bottom: 10px;">Sumá tus canciones preferidas a la lista:</p>
       
       <a href="https://open.spotify.com/playlist/4gTh844DmK7fYozqPjYD9L?si=jf1bOgDpSHKNJnf_rC37Rw&utm_source=whatsapp" target="_blank" class="btn-spotify">
-        🟢 Abrir Playlist en Spotify
-      </a>
-    </div>
-
-    <!-- STORY: Tarjeta RSVP Dual (Formulario Modal + WhatsApp) -->
-    <div class="story-card">
-      <h2>CONFIRMAR ASISTENCIA</h2>
-      <p class="subtitle">¡Elegí la opción que te sea más cómoda!</p>
-
-      <button class="btn-action btn-form" onclick="openModal()">
-        📝 Completar Ficha de Asistencia
-      </button>
-
-      <a href="https://wa.me/5491165332168?text=%C2%A1Hola%20Mati!%20Confirmo%20mi%20asistencia%20para%20tu%20Sunset%2040th." target="_blank" class="btn-action btn-wsp">
-        💬 Confirmar directo por WhatsApp
-      </a>
-    </div>
-
-  </div>
-
-  <!-- MODAL DE GOOGLE FORMS -->
-  <div class="modal-overlay" id="formModal">
-    <div class="modal-content">
-      <div class="modal-header">
-        <span style="color: #ffffff; font-family: var(--font-main); font-size: 0.9rem; font-weight: 600;">CONFIRMACIÓN DE ASISTENCIA</span>
-        <button class="close-modal" onclick="closeModal()">&times;</button>
-      </div>
-      <div class="modal-body">
-        <iframe src="https://forms.gle/bDea72XKBmxAVxV16?embedded=true">Cargando formulario...</iframe>
-      </div>
-    </div>
-  </div>
-
-  <script>
-    // Cuenta regresiva
-    const targetDate = new Date("January 2, 2027 21:00:00").getTime();
-
-    function updateCountdown() {
-      const now = new Date().getTime();
-      const distance = targetDate - now;
-
-      if (distance < 0) {
-        document.getElementById("days").innerText = "00";
-        return;
-      }
-
-      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-      document.getElementById("days").innerText = days < 10 ? "0" + days : days;
-      document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
-      document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
-      document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
-    }
-    setInterval(updateCountdown, 1000);
-    updateCountdown();
-
-    function openModal() {
-      document.getElementById('formModal').style.display = 'flex';
-    }
-    function closeModal() {
-      document.getElementById('formModal').style.display = 'none';
-    }
-  </script>
-
-</body>
-</html>
