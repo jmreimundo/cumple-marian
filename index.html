@@ -315,3 +315,83 @@
       <p style="font-size: 0.85rem; margin-bottom: 10px;">Sumá tus canciones preferidas a la lista:</p>
       
       <a href="https://open.spotify.com/playlist/4gTh844DmK7fYozqPjYD9L?si=jf1bOgDpSHKNJnf_rC37Rw&utm_source=whatsapp" target="_blank" class="btn-spotify">
+        🟢 Abrir Playlist en Spotify
+      </a>
+    </div>
+
+    <!-- STORY 5: Confirmación de Asistencia -->
+    <div class="story-card">
+      <h2>CONFIRMAR ASISTENCIA</h2>
+      <p class="subtitle">Esperamos contar con vos para festejar</p>
+
+      <button class="btn-action btn-form" onclick="openModal()">
+        📝 Completar Ficha de Asistencia
+      </button>
+
+      <a href="https://wa.me/5491165332168?text=%C2%A1Hola%20Mati!%20Confirmo%20mi%20asistencia%20para%20los%2040%20de%20Mariana." target="_blank" class="btn-action btn-wsp">
+        💬 Confirmar directo por WhatsApp
+      </a>
+    </div>
+
+  </div>
+
+  <!-- MODAL DE GOOGLE FORMS -->
+  <div class="modal-overlay" id="formModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <span style="color: var(--text-main); font-family: var(--font-serif); font-size: 0.9rem; font-weight: bold;">CONFIRMACIÓN DE ASISTENCIA</span>
+        <button class="close-modal" onclick="closeModal()">&times;</button>
+      </div>
+      <div class="modal-body">
+        <iframe src="https://forms.gle/bDea72XKBmxAVxV16?embedded=true">Cargando formulario...</iframe>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // Cuenta regresiva
+    const targetDate = new Date("January 2, 2027 21:00:00").getTime();
+
+    function updateCountdown() {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        document.getElementById("days").innerText = "00";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      document.getElementById("days").innerText = days < 10 ? "0" + days : days;
+      document.getElementById("hours").innerText = hours < 10 ? "0" + hours : hours;
+      document.getElementById("minutes").innerText = minutes < 10 ? "0" + minutes : minutes;
+      document.getElementById("seconds").innerText = seconds < 10 ? "0" + seconds : seconds;
+    }
+    setInterval(updateCountdown, 1000);
+    updateCountdown();
+
+    // Carrusel Automático de Fotos
+    let currentSlide = 0;
+    const slides = document.querySelectorAll('.carousel-slide');
+    function nextSlide() {
+      slides[currentSlide].classList.remove('active');
+      currentSlide = (currentSlide + 1) % slides.length;
+      slides[currentSlide].classList.add('active');
+    }
+    setInterval(nextSlide, 3500); // Cambia de foto cada 3.5 segundos
+
+    // Modal
+    function openModal() {
+      document.getElementById('formModal').style.display = 'flex';
+    }
+    function closeModal() {
+      document.getElementById('formModal').style.display = 'none';
+    }
+  </script>
+
+</body>
+</html>
