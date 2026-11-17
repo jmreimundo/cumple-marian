@@ -11,8 +11,7 @@
       --text-main: #2b2b2b;      /* Gris oscuro muy legible */
       --text-muted: #6b7280;
       --accent-color: #8c7355;   /* Bronce suave estilo mediterráneo */
-      --font-serif: 'Cinzel', 'Didot', 'Garamond', Georgia, serif;
-      --font-sans: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -20,7 +19,7 @@
     body {
       background-color: var(--bg-color);
       color: var(--text-main);
-      font-family: var(--font-sans);
+      font-family: var(--font-main);
       display: flex;
       justify-content: center;
       padding: 0;
@@ -48,18 +47,20 @@
     }
 
     .greek-title {
-      font-family: var(--font-serif);
+      font-family: var(--font-main);
+      font-weight: 600;
       color: var(--accent-color);
-      letter-spacing: 3px;
+      letter-spacing: 2px;
       font-size: 0.8rem;
       text-transform: uppercase;
       margin-bottom: 8px;
     }
 
     h1, h2 {
-      font-family: var(--font-serif);
+      font-family: var(--font-main);
+      font-weight: 700;
       color: var(--text-main);
-      letter-spacing: 1px;
+      letter-spacing: 0.5px;
     }
 
     h1 { font-size: 1.8rem; margin-bottom: 5px; }
@@ -69,7 +70,6 @@
       color: var(--text-muted);
       font-size: 0.9rem;
       margin-bottom: 15px;
-      font-family: var(--font-sans);
     }
 
     .divider {
@@ -79,7 +79,7 @@
       margin: 15px auto;
     }
 
-    /* Cuenta regresiva estilo griego */
+    /* Cuenta regresiva */
     .countdown-grid {
       display: flex;
       justify-content: center;
@@ -99,7 +99,6 @@
       font-size: 1.4rem;
       font-weight: bold;
       color: var(--accent-color);
-      font-family: var(--font-serif);
     }
 
     .lbl-time {
@@ -108,7 +107,7 @@
       text-transform: uppercase;
     }
 
-    /* Carrusel de Fotos de Marian (Slide Automático) */
+    /* Carrusel de Fotos de Marian */
     .carousel-container {
       position: relative;
       width: 100%;
@@ -197,8 +196,7 @@
     .btn-form {
       background: var(--accent-color);
       color: #ffffff;
-      font-family: var(--font-serif);
-      letter-spacing: 1px;
+      font-weight: 600;
     }
 
     /* Modal Desplegable */
@@ -265,7 +263,7 @@
     <div class="story-card">
       <div class="greek-title">Celebración Especial</div>
       <h1>LOS 40 DE MARIAN</h1>
-      <p class="subtitle">2 de enero 2027 · [Enoile](http://googleusercontent.com/map_location_reference/1) Caballito[cite: 1]</p>
+      <p class="subtitle">2 de enero 2027 · Enoile Caballito</p>
 
       <div class="divider"></div>
 
@@ -296,7 +294,7 @@
     <div class="story-card">
       <h2>EL ENCUENTRO</h2>
       <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 10px;">
-        📍 <b>[Enoile](http://googleusercontent.com/map_location_reference/2) Café & Eventos</b>[cite: 1]<br>
+        📍 <b>Enoile Café & Eventos</b>[cite: 1]<br>
         Jauretche 225, Caballito[cite: 1]<br>
         ⏰ Empezamos 21 h<br>
         👦👧 <i>Menú para niños incluido</i>
@@ -339,7 +337,7 @@
   <div class="modal-overlay" id="formModal">
     <div class="modal-content">
       <div class="modal-header">
-        <span style="color: var(--text-main); font-family: var(--font-serif); font-size: 0.9rem; font-weight: bold;">CONFIRMACIÓN DE ASISTENCIA</span>
+        <span style="color: var(--text-main); font-size: 0.9rem; font-weight: bold;">CONFIRMACIÓN DE ASISTENCIA</span>
         <button class="close-modal" onclick="closeModal()">&times;</button>
       </div>
       <div class="modal-body">
