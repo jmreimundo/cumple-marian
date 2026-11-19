@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Los 40 de Mariana · Edición Especial</title>
+  <title>Los 40 de Marian · Edición Especial</title>
   <style>
     :root {
       --bg-color: #f7f5f0;       /* Tono arena / blanco tiza estilo Enoile */
@@ -11,6 +11,7 @@
       --text-main: #2b2b2b;      /* Gris oscuro muy legible */
       --text-muted: #6b7280;
       --accent-color: #8c7355;   /* Bronce suave estilo mediterráneo */
+      --soft-surface: #faf8f5;
       --font-main: 'Segoe UI', system-ui, -apple-system, sans-serif;
     }
 
@@ -39,7 +40,7 @@
 
     .story-card {
       background: var(--card-bg);
-      border: 1px solid rgba(140, 115, 85, 0.2);
+      border: 1px solid rgba(140, 115, 85, 0.22);
       border-radius: 16px;
       padding: 25px 20px;
       text-align: center;
@@ -88,7 +89,7 @@
     }
 
     .box-time {
-      background: #faf8f5;
+      background: var(--soft-surface);
       border: 1px solid rgba(140, 115, 85, 0.2);
       border-radius: 8px;
       padding: 10px;
@@ -150,6 +151,57 @@
       height: 100%;
       border: 0;
     }
+
+    /* Tarjeta híbrida de Estacionamientos (Guía rápida + Botones a Maps) */
+    .parking-list {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 12px;
+      text-align: left;
+    }
+
+    .parking-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      background: var(--soft-surface);
+      border: 1px solid rgba(140, 115, 85, 0.2);
+      border-radius: 10px;
+      padding: 12px 14px;
+    }
+
+    .parking-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .parking-name {
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--text-main);
+    }
+
+    .parking-dist {
+      font-size: 0.8rem;
+      color: var(--text-muted);
+    }
+
+    .btn-map-mini {
+      background: var(--accent-color);
+      color: #ffffff;
+      text-decoration: none;
+      font-size: 0.8rem;
+      font-weight: 600;
+      padding: 8px 12px;
+      border-radius: 8px;
+      white-space: nowrap;
+      transition: opacity 0.2s;
+    }
+
+    .btn-map-mini:hover { opacity: 0.9; }
 
     /* Botón Spotify */
     .btn-spotify {
@@ -227,7 +279,7 @@
 
     .modal-header {
       padding: 15px;
-      background: #faf8f5;
+      background: var(--soft-surface);
       display: flex;
       justify-content: space-between;
       align-items: center;
@@ -262,8 +314,8 @@
     <!-- STORY 1: Portada y Cuenta Regresiva -->
     <div class="story-card">
       <div class="greek-title">Celebración Especial</div>
-      <h1>LOS 40 DE MARIAN 🎉</h1>
-      <p class="subtitle">Sábado 2 de enero 2027 · Enoile Caballito</p>
+      <h1>LOS 40 DE MARIAN</h1>
+      <p class="subtitle">2 de enero 2027 · Enoile Caballito</p>
 
       <div class="divider"></div>
 
@@ -279,8 +331,8 @@
 
     <!-- STORY 2: Carrusel Exclusivo de Fotos de Marian -->
     <div class="story-card">
-      <h2>CON FAMILIA Y AMIGOS 💙</h2>
-      <p class="subtitle">¡Celebrando la vida!</p>
+      <h2>MOMENTOS DE MARIAN</h2>
+      <p class="subtitle">Celebrando la vida y los 40</p>
       
       <div class="carousel-container">
         <div class="carousel-slide active"><img src="01.jpg" alt="Marian 1"></div>
@@ -292,7 +344,7 @@
 
     <!-- STORY 3: Ubicación con Google Maps y Detalles -->
     <div class="story-card">
-      <h2>ACÁ CELEBRAMOS</h2>
+      <h2>EL ENCUENTRO</h2>
       <p style="font-size: 0.95rem; line-height: 1.6; margin-bottom: 10px;">
         📍 <b>Enoile Café & Eventos</b><br>
         Jauretche 225, Caballito<br>
@@ -301,12 +353,6 @@
       </p>
 
       <!-- Google Maps Embebido -->
-      <div class="map-container">
-        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.992641267814!2d-58.44315!3d-34.6177!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccb7494d72baf%3A0x4504ee444038a8ba!2sDr.%20Arturo%20Jauretche%20225%2C%20C1405%20Cdad.%20Aut%C3%B3noma%20de%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1700000000000!5m2!1ses!2sar" allowfullscreen="" loading="lazy"></iframe>
-      </div>
-    </div>
-
-    <!-- Google Maps Embebido -->
       <div class="map-container">
         <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3283.992641267814!2d-58.44315!3d-34.6177!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x95bccb7494d72baf%3A0x4504ee444038a8ba!2sDr.%20Arturo%20Jauretche%20225%2C%20C1405%20Cdad.%20Aut%C3%B3noma%20de%20Buenos%20Aires!5e0!3m2!1ses!2sar!4v1700000000000!5m2!1ses!2sar" allowfullscreen="" loading="lazy"></iframe>
       </div>
@@ -425,7 +471,7 @@
       currentSlide = (currentSlide + 1) % slides.length;
       slides[currentSlide].classList.add('active');
     }
-    setInterval(nextSlide, 3500); // Cambia de foto cada 3.5 segundos
+    setInterval(nextSlide, 3500);
 
     // Modal
     function openModal() {
